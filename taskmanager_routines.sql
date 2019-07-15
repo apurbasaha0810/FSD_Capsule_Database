@@ -18,54 +18,6 @@
 --
 -- Dumping routines for database 'taskmanager'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `deleteSpecificTask` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteSpecificTask`(IN task_id_i int)
-BEGIN
-
-DECLARE i_parent_id int;
-
-
-DECLARE EXIT HANDLER FOR 1051 
-SELECT 'Please create table abc first' AS test;
-if(select 1 from taskmanager.task where task_id=task_id_i) then
-
-set i_parent_id=(select parent_id
-from taskmanager.parent_task pt
-where parent_task_id=task_id_i);
-
-if(select 1 from taskmanager.task where parent_id=i_parent_id) then
-
-select "this task cant be deleted";
-
-
-
-else
-delete from taskmanager.task
-where task_id=task_id_i;
-SELECT t.task_id,t.parent_id,t.task,t.start_date,t.end_date,t.priority,t.finished,pt.parent_task FROM task t 
-left join parent_task pt on pt.parent_id=t.parent_id
-left join taskmanager.task t1
-on t1.task_id=pt.parent_task_id limit 1;
-end if;
-end if;
-
-
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `finishTask` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -285,4 +237,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-15  0:14:20
+-- Dump completed on 2019-07-15 22:48:29
