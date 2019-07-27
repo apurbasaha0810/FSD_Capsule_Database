@@ -16,17 +16,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `parent_task`
+-- Table structure for table `project_details`
 --
 
-DROP TABLE IF EXISTS `parent_task`;
+DROP TABLE IF EXISTS `project_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `parent_task` (
-  `parent_id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_task` varchar(100) NOT NULL,
-  PRIMARY KEY (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `project_details` (
+  `project_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_name` varchar(100) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `priority` int(2) NOT NULL,
+  `manager_id` int(10) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
+  `no_of_tasks` int(11) NOT NULL DEFAULT '0',
+  `no_of_tasks_completed` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`project_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -38,4 +45,4 @@ CREATE TABLE `parent_task` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-27 17:10:47
+-- Dump completed on 2019-07-27 17:10:46
